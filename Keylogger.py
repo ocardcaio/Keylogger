@@ -1,2 +1,2 @@
 print("Testando")
-s = input(print("teste: "))
+s = input(print("teste:"));
