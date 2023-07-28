@@ -7,6 +7,7 @@
 #3- Registrar um arquivo para receber as informações
 #|-----------------------------------------------------------------------------------------------------------------------------|
 #codigo interpretado e modificado por mim
+#.
 
 import keyboard
 from threading import Timer
